@@ -1,0 +1,20 @@
+{
+    "name": "samsung/cart",
+    "autoload": {
+        "psr-4": {
+            "Samsung\\Cart\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ricardo Moreira",
+            "email": "calditos1988@outlook.com"
+        }
+    ],
+    "require": {},
+    "autoload":{
+        "psr-4": {
+            "app\\":"app"
+        }
+    }
+}
