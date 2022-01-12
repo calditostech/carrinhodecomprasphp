@@ -1,0 +1,11 @@
+<?php
+
+session_start();
+
+require '../vendor/autoload.php';
+
+use app\classes\Cart;
+
+(new Cart)->clear();
+
+header('location: cart.php');

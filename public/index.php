@@ -1,18 +1,21 @@
 <?php
 use app\classes\Cart;
+use app\database\models\Read;
 
 session_start();
 
 require '../vendor/autoload.php';
 
-$products = require '../app/helpers/products.php';
+//$products = require '../app/helpers/products.php';
 
 $cart = new Cart;
 
-$cart->quantity(4,5);
-$cart->dump();
 
-$productsInCart = (new Cart)->cart();
+$read = new Read;
+$products = $read->all('products');
+//$cart->dump();
+
+$productsInCart = $cart->cart();
 ?>
 
 
@@ -22,6 +25,7 @@ $productsInCart = (new Cart)->cart();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/styles.css">
     <title>Cart</title>
 </head>
 <body>
@@ -29,8 +33,11 @@ $productsInCart = (new Cart)->cart();
       <div id="container">
           <h3>Cart: <?php echo count($productsInCart); ?> | <a href="cart.php"> Go To Cart </a></h3>
           <ul>
-           <?php foreach($products as $index => $product): ?>
-                  <li><?php echo $product['name']; ?> | R$ <?php echo number_format($product['price'], 2, ',', '.'); ?></li> <a href="add.php?id=<?php echo $index ?>">add to cart</a>
+           <?php foreach($products as $product): ?>
+                <li>
+                    <?php echo $product->name; ?> | R$ <?php echo number_format($product->price, 2, ',', '.'); ?>
+                       <a href="add.php?id=<?php echo $product->id ?>">add to cart</a>
+                </li>
            <?php endforeach; ?>
           </ul>
 </body>
